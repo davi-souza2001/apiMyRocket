@@ -5,4 +5,5 @@ const router = Router()
 
 router.get('/getAllUsers', UserController.getAllUsers)
 router.post('/register', UserController.register)
+
 export default router

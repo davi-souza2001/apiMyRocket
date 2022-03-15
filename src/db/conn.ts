@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 async function main(){
-    await mongoose.connect('mongodb+srv://MyRocket:MyRocketDev@myrocket.wlhec.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+    await mongoose.connect(process.env.MONGO_CONNECT)
     console.log('Conect to Mongoose')
 }
 
