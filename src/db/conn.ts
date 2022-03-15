@@ -5,6 +5,6 @@ async function main(){
     console.log('Conect to Mongoose')
 }
 
-main().catch((err) => console.log(`Erro no mongo: ${err}`))
+main().catch((err) => console.log(`Erro in mongodb: ${err}`))
 
 export default mongoose
