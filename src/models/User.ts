@@ -12,9 +12,23 @@ const User = mongoose.model(
             type: String,
             required: true
         },
-        email: {
+        seniority:{
             type: String,
             required: true
+        },
+        area:{
+            type: String,
+            required: true
+        },
+        comumone:{
+            type: String,
+            required: true
+        },
+        comumtwo:{
+            type: String
+        },
+        comumthree:{
+            type: String
         },
         description: {
             type: String,
@@ -32,7 +46,7 @@ const User = mongoose.model(
         instagram: {
             type: String,
         },
-        password: {
+        email: {
             type: String,
             required: true
         }

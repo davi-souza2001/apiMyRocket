@@ -17,13 +17,19 @@ export default class UserController {
     static async register(req: Request, res: Response) {
         const name = req.body.name
         const nickname = req.body.nickname
+        const seniority = req.body.seniority
+        const area = req.body.area
+        const comumone = req.body.comumone
         const email = req.body.email
         const description = req.body.description
-        const password = req.body.password
-        const linkedin = req.body.linkedin
         const github = req.body.github
-        const youtube = req.body.youtube
-        const instagram = req.body.instagram
+
+
+        let comumtwo = req.body.comumtwo
+        let comumthree = req.body.comumthree
+        let linkedin = req.body.linkedin
+        let youtube = req.body.youtube
+        let instagram = req.body.instagram
 
         //validations
         if (!name) {
@@ -34,6 +40,18 @@ export default class UserController {
             res.status(422).json({ message: 'O seu nick é obrigatório' })
             return
         }
+        if (!seniority) {
+            res.status(422).json({ message: 'Sua senioridade é obrigatória' })
+            return
+        }
+        if (!area) {
+            res.status(422).json({ message: 'Sua area é obrigatória' })
+            return
+        }
+        if (!comumone) {
+            res.status(422).json({ message: 'Escolha pelo menos uma comunidade!' })
+            return
+        }
         if (!description) {
             res.status(422).json({ message: 'Sua descrição é obrigatória' })
             return
@@ -42,9 +60,25 @@ export default class UserController {
             res.status(422).json({ message: 'O email é obrigatório' })
             return
         }
-        if (!password) {
-            res.status(422).json({ message: 'A senha é obrigatória' })
+        if (!github) {
+            res.status(422).json({ message: 'Seu Github é obrigatório' })
             return
+        }
+
+        if (!comumtwo){
+            comumtwo = ""
+        }
+        if (!comumthree){
+            comumthree = ""
+        }
+        if (!linkedin){
+            linkedin = ""
+        }
+        if (!youtube){
+            youtube = ""
+        }
+        if (!instagram){
+            instagram = ""
         }
 
         //check if user exists
@@ -62,10 +96,18 @@ export default class UserController {
         //create user
         const user = new User({
             name,
-            email,
-            password,
             nickname,
-            description
+            seniority,
+            area,
+            comumone,
+            comumtwo,
+            comumthree,
+            description,
+            email,
+            github,
+            linkedin,
+            youtube,
+            instagram
         })
 
         try {
