@@ -18,6 +18,7 @@ export default class UserController {
         const email = req.body.email
         const post = req.body.post
         const tech = req.body.tech
+        const likes = req.body.likes
 
         if (!email) {
             res.status(422).json({ message: 'Email é obrigatório' })
@@ -35,7 +36,8 @@ export default class UserController {
         const postNew = new Post({
             email,
             post,
-            tech
+            tech,
+            likes
         })
 
         try {

@@ -15,7 +15,10 @@ const Post = mongoose.model(
         tech:{
             type: String,
             required: true
-        }
+        },
+        likes:{
+            type: [String],
+        }   
     }, { timestamps: true })
 )
 
