@@ -118,16 +118,30 @@ export default class UserController {
         }
     }
 
+    static async checkUser(req: Request, res: Response) {
+        const emailUser = req.body.emailuser
+
+        const searchUser = await User.findOne({ email: emailUser })
+
+        if (searchUser) {
+            res.status(200).json(searchUser)
+            return
+        } else {
+            res.status(404).json({ error: 'Usuário not found' })
+            return
+        }
+    }
+
     static async searchUser(req: Request, res: Response) {
         const userSearch = req.body.usersearch
 
         const userExists = await User.findOne({ nickname: userSearch })
 
         if (userExists) {
-            res.status(200).json({ userExists })
+            res.status(200).json(userExists)
             return
         } else {
-            res.status(404).json({ error: 'Usuário não encontrado' })
+            res.status(404).json({ error: 'Usuário not found' })
             return
         }
     }
