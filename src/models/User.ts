@@ -46,6 +46,9 @@ const User = mongoose.model(
         instagram: {
             type: String,
         },
+        photo: {
+            type: String,
+        },
         email: {
             type: String,
             required: true
@@ -53,4 +56,4 @@ const User = mongoose.model(
     }, { timestamps: true })
 )
 
-export default  User
+export default User

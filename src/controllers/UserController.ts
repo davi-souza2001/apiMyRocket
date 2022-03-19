@@ -24,12 +24,12 @@ export default class UserController {
         const description = req.body.description
         const github = req.body.github
 
-
         let comumtwo = req.body.comumtwo
         let comumthree = req.body.comumthree
         let linkedin = req.body.linkedin
         let youtube = req.body.youtube
         let instagram = req.body.instagram
+        let photo = req.body.photo
 
         //validations
         if (!name) {
@@ -80,6 +80,9 @@ export default class UserController {
         if (!instagram) {
             instagram = ""
         }
+        if (!photo) {
+            photo = ""
+        }
 
         //check if user exists
         const userExists = await User.findOne({ email: email })
@@ -88,10 +91,6 @@ export default class UserController {
             res.status(422).json({ message: "Email já cadastrado !" })
             return
         }
-
-        // // create password
-        // const salt = await bcrypt.genSalt(10)
-        // const passwordHash = await bcrypt.hash(password, salt)
 
         //create user
         const user = new User({
@@ -107,7 +106,8 @@ export default class UserController {
             github,
             linkedin,
             youtube,
-            instagram
+            instagram,
+            photo
         })
 
         try {
