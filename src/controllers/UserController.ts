@@ -5,11 +5,11 @@ export default class UserController {
     static async getAllUsers(req: Request, res: Response) {
         const allUsers = await User.find()
 
-        if(allUsers) {
+        if (allUsers) {
             res.status(200).json(allUsers)
             return
-        } else{
-            res.status(200).json({message: 'Nenhum usuário cadastrado'})
+        } else {
+            res.status(200).json({ message: 'Nenhum usuário cadastrado' })
             return
         }
     }
@@ -65,19 +65,19 @@ export default class UserController {
             return
         }
 
-        if (!comumtwo){
+        if (!comumtwo) {
             comumtwo = ""
         }
-        if (!comumthree){
+        if (!comumthree) {
             comumthree = ""
         }
-        if (!linkedin){
+        if (!linkedin) {
             linkedin = ""
         }
-        if (!youtube){
+        if (!youtube) {
             youtube = ""
         }
-        if (!instagram){
+        if (!instagram) {
             instagram = ""
         }
 
@@ -115,6 +115,20 @@ export default class UserController {
             res.status(200).json({ message: "Tudo certo !", newUser })
         } catch (error) {
             res.status(500).json({ message: 'Error ' + error })
+        }
+    }
+
+    static async searchUser(req: Request, res: Response) {
+        const userSearch = req.body.usersearch
+
+        const userExists = await User.findOne({ nickname: userSearch })
+
+        if (userExists) {
+            res.status(200).json({ userExists })
+            return
+        } else {
+            res.status(404).json({ error: 'Usuário não encontrado' })
+            return
         }
     }
 }
