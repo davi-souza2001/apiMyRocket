@@ -11,6 +11,10 @@ const Post = mongoose.model(
         post:{
             type: String,
             required: true
+        },
+        tech:{
+            type: String,
+            required: true
         }
     }, { timestamps: true })
 )
