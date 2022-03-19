@@ -91,7 +91,7 @@ export default class UserController {
             res.status(422).json({ message: "Email já cadastrado !" })
             return
         }
-
+        
         //create user
         const user = new User({
             name,
