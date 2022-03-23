@@ -158,6 +158,7 @@ export default class UserController {
         const email = req.body.email
         const description = req.body.description
         const github = req.body.github
+        const gas = req.body.gas
 
         let comumtwo = req.body.comumtwo
         let comumthree = req.body.comumthree
@@ -231,7 +232,7 @@ export default class UserController {
             youtube,
             instagram,
             photo,
-            gas: 15
+            gas
         }
 
         // Check if user exists
