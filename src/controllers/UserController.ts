@@ -107,7 +107,8 @@ export default class UserController {
             linkedin,
             youtube,
             instagram,
-            photo
+            photo,
+            gas: 15
         })
 
         try {
