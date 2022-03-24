@@ -251,11 +251,11 @@ export default class UserController {
             )
 
             res.status(200).json({
-                message: 'Usuário atualizado com sucesso',
+                message: 'Usuário atualizado com sucesso'
             })
             return
         } catch (error) {
-            res.status(500).json({ message: error })
+            res.status(500).json({ message: error  })
             return
         }
     }
