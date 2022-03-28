@@ -1,6 +1,8 @@
 import { Request, Response } from 'express'
 import User from '../models/User'
 
+import Client from '../data/client'
+
 export default class UserController {
     static async getAllUsers(req: Request, res: Response) {
         const allUsers = await User.find()
@@ -147,6 +149,26 @@ export default class UserController {
         }
     }
 
+    static async getGithubUser(req: Request, res: Response) {
+        const emailUser = req.body.emailuser
+
+        const searchUser = await User.findOne({ email: emailUser })
+
+        // /davi-souza2001/repos
+        if (searchUser) {
+            const gitHubUser = searchUser.github
+            const gitHubUserRepos = await Client.get(`/${gitHubUser}/repos`)
+            .then((repos) => repos.data)
+            .catch((err) => console.log(err))
+
+            res.status(200).json(gitHubUserRepos)
+            return
+        } else {
+            res.status(404).json({ error: 'Usuário not found' })
+            return
+        }
+    }
+
     static async editUser(req: Request, res: Response) {
         const idUserSend = req.params.id
 
@@ -255,7 +277,7 @@ export default class UserController {
             })
             return
         } catch (error) {
-            res.status(500).json({ message: error  })
+            res.status(500).json({ message: error })
             return
         }
     }
