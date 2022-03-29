@@ -135,7 +135,7 @@ export default class UserController {
         }
     }
 
-    static async searchUser(req: Request, res: Response) {
+    static async searchUserByNickName(req: Request, res: Response) {
         const userSearch = req.body.usersearch
 
         const userExists = await User.findOne({ nickname: userSearch })
@@ -144,8 +144,27 @@ export default class UserController {
             res.status(200).json(userExists)
             return
         } else {
-            res.status(404).json({ error: 'Usuário not found' })
+            res.status(404).json({ error: 'User not found :(' })
             return
+        }
+    }
+
+    static async searchUserByComum(req: Request, res: Response) {
+        const comum = req.body.comum
+        const allUsers = await User.find()
+        const userFoundComum = []
+
+        allUsers.map((e) => {
+            if (e.comumone === comum || e.comumtwo === comum || e.comumthree === comum) {
+                userFoundComum.push(e)
+            }
+        })
+
+        if (userFoundComum.length > 0) {
+            res.status(200).json({ userFoundComum })
+            return
+        } else{
+            res.status(404).json({ error: 'User not found :(' })
         }
     }
 
@@ -158,8 +177,8 @@ export default class UserController {
         if (searchUser) {
             const gitHubUser = searchUser.github
             const gitHubUserRepos = await Client.get(`/${gitHubUser}/repos`)
-            .then((repos) => repos.data)
-            .catch((err) => console.log(err))
+                .then((repos) => repos.data)
+                .catch((err) => console.log(err))
 
             res.status(200).json(gitHubUserRepos)
             return

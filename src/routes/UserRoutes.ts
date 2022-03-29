@@ -7,7 +7,8 @@ router.get('/getAllUsers', UserController.getAllUsers)
 router.post('/getGitHubUser', UserController.getGithubUser)
 router.post('/register', UserController.register)
 router.post('/checkuser', UserController.checkLoginUser)
-router.post('/searchuser', UserController.searchUser)
+router.post('/searchuserByNickName', UserController.searchUserByNickName)
+router.post('/searchuserByComum', UserController.searchUserByComum)
 router.patch('/edituser/:id', UserController.editUser)
 
 export default router
