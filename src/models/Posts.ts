@@ -26,6 +26,10 @@ const Post = mongoose.model(
         userPhoto: {
             type: String,
             required: true
+        },
+        idUnic: {
+            type: Number,
+            required: true
         }   
     }, { timestamps: true })
 )

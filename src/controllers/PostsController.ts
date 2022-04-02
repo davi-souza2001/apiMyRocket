@@ -44,7 +44,8 @@ export default class UserController {
             tech,
             likes,
             userName: searchUser.name,
-            userPhoto: searchUser.photo
+            userPhoto: searchUser.photo,
+            idUnic: Math.random()
         })
 
         try {
