@@ -18,6 +18,14 @@ const Post = mongoose.model(
         },
         likes:{
             type: [String],
+        },
+        userName: {
+            type: String,
+            required: true
+        },
+        userPhoto: {
+            type: String,
+            required: true
         }   
     }, { timestamps: true })
 )

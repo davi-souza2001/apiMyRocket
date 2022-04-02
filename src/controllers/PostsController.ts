@@ -1,4 +1,6 @@
 import { Request, Response } from 'express'
+import User from '../models/User'
+
 import Post from '../models/Posts'
 
 export default class UserController {
@@ -20,8 +22,11 @@ export default class UserController {
         const tech = req.body.tech
         const likes = req.body.likes
 
-        if (!email) {
-            res.status(422).json({ message: 'Email é obrigatório' })
+        const searchUser = await User.findOne({ email })
+        console.log(searchUser)
+
+        if (!searchUser) {
+            res.status(200).json({ message: 'Usuário precisar estar logado!' })
             return
         }
         if (!post) {
@@ -37,12 +42,14 @@ export default class UserController {
             email,
             post,
             tech,
-            likes
+            likes,
+            userName: searchUser.name,
+            userPhoto: searchUser.photo
         })
 
         try {
             const newPost = await postNew.save()
-            res.status(200).json({ message: "Tudo certo !", newPost })
+            res.status(200).json({ message: "Tudo certo !" })
         } catch (error) {
             res.status(500).json({ message: 'Error ' + error })
         }
