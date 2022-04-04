@@ -23,6 +23,10 @@ const Post = mongoose.model(
             type: String,
             required: true
         },
+        userNick: {
+            type: String,
+            required: true
+        },
         userPhoto: {
             type: String,
             required: true
