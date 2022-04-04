@@ -71,12 +71,28 @@ export default class UserController {
     static async giveLike(req: Request, res: Response) {
         const idPost = req.body.idPost
         const emailUser = req.body.emailUser
+        let emailAlreadyGiveLike = false
 
         const postExists = await Post.findOne({ _id: idPost })
         const newPost = postExists
 
-        newPost.likes.push(emailUser)
-        
+        newPost.likes.map((like: string) => {
+            if (like === emailUser) {
+                emailAlreadyGiveLike = true
+            }
+        })
+
+        if (emailAlreadyGiveLike) {
+            newPost.likes.map((like: string, index: number) => {
+                if (like === emailUser) {
+                    newPost.likes.splice(index, 1);
+                }
+            })
+        } else {
+            newPost.likes.push(emailUser)
+            console.log(newPost.likes)
+        }
+
         try {
             if (postExists) {
                 await Post.findOneAndUpdate(
