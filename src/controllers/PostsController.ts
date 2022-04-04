@@ -67,4 +67,29 @@ export default class UserController {
             res.status(500).json({ message: 'Error ' + error })
         }
     }
+
+    static async giveLike(req: Request, res: Response) {
+        const idPost = req.body.idPost
+        const emailUser = req.body.emailUser
+
+        const postExists = await Post.findOne({ _id: idPost })
+        const newPost = postExists
+
+        newPost.likes.push(emailUser)
+        
+        try {
+            if (postExists) {
+                await Post.findOneAndUpdate(
+                    { _id: idPost },
+                    { $set: newPost },
+                    { new: true }
+                )
+                res.status(200).json({ message: 'Tudo certo!' })
+            } else {
+                res.status(404).json({ message: 'Post não existe' })
+            }
+        } catch (error) {
+            res.status(500).json({ message: 'Error ' + error })
+        }
+    }
 }
