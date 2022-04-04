@@ -23,7 +23,6 @@ export default class UserController {
         const likes = req.body.likes
 
         const searchUser = await User.findOne({ email })
-        console.log(searchUser)
 
         if (!searchUser) {
             res.status(200).json({ message: 'Usuário precisar estar logado!' })
@@ -49,9 +48,21 @@ export default class UserController {
             idUnic: Math.random()
         })
 
+        const newUser = searchUser
+        newUser.gas = newUser.gas - 1
+
         try {
-            const newPost = await postNew.save()
-            res.status(200).json({ message: "Tudo certo !" })
+            if (newUser.gas >= 0) {
+                const newPost = await postNew.save()
+                await User.findOneAndUpdate(
+                    { _id: newUser._id },
+                    { $set: newUser },
+                    { new: true }
+                )
+                res.status(200).json({ message: "Tudo certo !" })
+            } else {
+                res.status(404).json({ message: 'Sem gasolina!' })
+            }
         } catch (error) {
             res.status(500).json({ message: 'Error ' + error })
         }
