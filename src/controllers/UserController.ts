@@ -152,7 +152,7 @@ export default class UserController {
     static async searchUserByComum(req: Request, res: Response) {
         const comum = req.body.comum
         const allUsers = await User.find()
-        const userFoundComum = []
+        const userFoundComum: Array<any> = []
 
         allUsers.map((e) => {
             if (e.comumone === comum || e.comumtwo === comum || e.comumthree === comum) {
