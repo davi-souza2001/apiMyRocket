@@ -32,8 +32,6 @@
   </div>
 </html>
 
-##
-
 
 ## Regras de negocio
 
